@@ -1,0 +1,7 @@
+mh_platform:
+    resource: "@MHPlatformBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
