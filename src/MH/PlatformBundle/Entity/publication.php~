@@ -98,45 +98,4 @@ class publication
     {
         return $this->dateAjout;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->animals = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add animal
-     *
-     * @param \MH\PlatformBundle\Entity\animal $animal
-     *
-     * @return publication
-     */
-    public function addAnimal(\MH\PlatformBundle\Entity\animal $animal)
-    {
-        $this->animals[] = $animal;
-
-        return $this;
-    }
-
-    /**
-     * Remove animal
-     *
-     * @param \MH\PlatformBundle\Entity\animal $animal
-     */
-    public function removeAnimal(\MH\PlatformBundle\Entity\animal $animal)
-    {
-        $this->animals->removeElement($animal);
-    }
-
-    /**
-     * Get animals
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAnimals()
-    {
-        return $this->animals;
-    }
 }
