@@ -1,8 +1,11 @@
 {% extends "::base.html.twig" %}
-
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block title %}MHPlatformBundle:Pub:ajouter{% endblock %}
 
 {% block body %}
 <h1>Welcome to the Pub:ajouter page</h1>
+<div class="well">
 {{form(form)}}
+</div>
+
 {% endblock %}
