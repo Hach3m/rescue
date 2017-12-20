@@ -40,6 +40,11 @@ class publication
    */
    private $animals;
 
+   /**
+   *@ORM\OneToMany(targetEntity="MH\PlatformBundle\Entity\image",mappedBy="publication", cascade={"persist"})
+   */
+
+  private $images;
 
     /**
      * Get id
@@ -138,5 +143,39 @@ class publication
     public function getAnimals()
     {
         return $this->animals;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \MH\PlatformBundle\Entity\image $image
+     *
+     * @return publication
+     */
+    public function addImage(\MH\PlatformBundle\Entity\image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \MH\PlatformBundle\Entity\image $image
+     */
+    public function removeImage(\MH\PlatformBundle\Entity\image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

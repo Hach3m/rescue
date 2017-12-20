@@ -1,8 +1,10 @@
 <?php
 
 namespace MH\PlatformBundle\Controller;
-use MH\PlatformBundle\Entity\animal;
-use MH\PlatformBundle\Form\animalType;
+use MH\PlatformBundle\Entity\publication;
+use MH\PlatformBundle\Entity\image;
+use MH\PlatformBundle\Form\publicationType;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -27,8 +29,12 @@ class PubController extends Controller
 
     public function ajouterAction(Request $request )
     {
-        $publication=new animal();
-        $formBuilder=$this->get('form.factory')->createBuilder(animalType::class,$publication);
+        $image=new image();
+        $image2=new image();
+        $publication=new publication();
+        $publication->addImage($image);
+        $publication->addImage($image2);
+        $formBuilder=$this->get('form.factory')->createBuilder(publicationType::class,$publication);
         /*$formBuilder
         ->add('nom',              TextType::class)
         ->add('dateNaissance',     DateType::class)
@@ -62,8 +68,16 @@ class PubController extends Controller
             $form->handleRequest($request);
             if($form->isValid())
             {
+              $images=$publication->getImages();
+
               $em=$this->getDoctrine()->getManager();
               $em->persist($publication);
+
+              foreach ($images as $i) {
+                    $i->setPublication($publication);
+                    $em->persist($i);
+                                  var_dump($i);
+              }
               $em->flush();
 
             }

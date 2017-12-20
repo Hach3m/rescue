@@ -40,6 +40,11 @@ class publication
    */
    private $animals;
 
+   /**
+   *@ORM\OneToMany(targetEntity="MH\PlatformBundle\Entity\image",mappedBy="publication", cascade={"persist"})
+   */
+
+  private $images;
 
     /**
      * Get id

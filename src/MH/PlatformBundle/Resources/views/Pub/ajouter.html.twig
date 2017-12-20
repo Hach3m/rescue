@@ -5,7 +5,9 @@
 {% block body %}
 <h1>Welcome to the Pub:ajouter page</h1>
 <div class="well">
-{{form(form)}}
+  <form method="post" enctype="multipart/form-data">
+  {{ form_widget(form) }}
+  </form><br><br>
 </div>
 
 {% endblock %}
