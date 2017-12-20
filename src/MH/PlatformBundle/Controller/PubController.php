@@ -2,18 +2,12 @@
 
 namespace MH\PlatformBundle\Controller;
 use MH\PlatformBundle\Entity\animal;
+use MH\PlatformBundle\Form\animalType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class PubController extends Controller
 {
@@ -34,8 +28,8 @@ class PubController extends Controller
     public function ajouterAction(Request $request )
     {
         $publication=new animal();
-        $formBuilder=$this->get('form.factory')->createBuilder(FormType::class,$publication);
-        $formBuilder
+        $formBuilder=$this->get('form.factory')->createBuilder(animalType::class,$publication);
+        /*$formBuilder
         ->add('nom',              TextType::class)
         ->add('dateNaissance',     DateType::class)
         ->add('ageApproximatif',   IntegerType::class)
@@ -51,7 +45,7 @@ class PubController extends Controller
                 )
               )
         ->add('publier',         SubmitType::class);
-
+        */
         /*$formBuilder
         ->add('text',            TextType::class)
         ->add('dateAjout',       DateType::class)

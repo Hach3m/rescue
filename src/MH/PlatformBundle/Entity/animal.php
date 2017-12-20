@@ -45,7 +45,7 @@ class animal
     /**
      * @var bool
      *
-     * @ORM\Column(name="etat", type="boolean")
+     * @ORM\Column(name="etat", type="boolean", nullable=true)
      */
     private $etat;
 
