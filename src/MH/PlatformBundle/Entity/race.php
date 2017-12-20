@@ -94,4 +94,3 @@ class race
         return $this->description;
     }
 }
-

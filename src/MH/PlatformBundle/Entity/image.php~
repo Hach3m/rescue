@@ -99,4 +99,28 @@ class image
     {
         return $this->alt;
     }
+
+    /**
+     * Set publication
+     *
+     * @param \MH\PlatformBundle\Entity\publication $publication
+     *
+     * @return image
+     */
+    public function setPublication(\MH\PlatformBundle\Entity\publication $publication)
+    {
+        $this->publication = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Get publication
+     *
+     * @return \MH\PlatformBundle\Entity\publication
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
 }
