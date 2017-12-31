@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+{% block title %}UserBundle{% endblock %}
+
+
+{% block body %}
+{% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+      <div class="alert alert-{{ key }}">
+        {{ message|trans({}, 'FOSUserBundle') }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {% block barre_logout %}
+  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+  Connecté en tant que {{app.user.username}}
+  <a href="{{path('fos_user_security_logout')}}">Déconnexion</a>
+  {% else %}
+  <a href="{{path('fos_user_security_login')}}">Connexion</a>
+  {% endif %}
+  {% endblock %}
+
+<div class="well">
+  {% block fos_user_content %}
+  {% endblock fos_user_content %}
+</div>
+
+{% endblock %}

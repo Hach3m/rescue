@@ -1,0 +1,15 @@
+mh_user_homepage:
+    path:     /
+    defaults: { _controller: MHUserBundle:Default:index }
+
+voir_user:
+    path:     /voirUser
+    defaults: { _controller: MHUserBundle:UserManager:voirUser }
+
+modifier_user:
+    path:     /modifierUser
+    defaults: { _controller: MHUserBundle:UserManager:modifierUser }
+
+supprimer_user:
+    path:     /supprimerUser
+    defaults: { _controller: MHUserBundle:UserManager:supprimerUser }

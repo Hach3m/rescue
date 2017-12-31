@@ -1,0 +1,14 @@
+{% extends "MHUserBundle::layout.html.twig" %}
+
+{% block title %}MHUserBundle:UserManager:modifierUser{% endblock %}
+
+{% block body %}
+{% block barre_logout %}{{parent()}}{% endblock %}
+{% block fos_user_content %}
+<div>
+  <p>ID: {{user.id}}</p>
+  <p>name: {{user.username}}</p>
+  <p>email: {{user.email}}</p>
+</div>
+{% endblock %}
+{% endblock %}
