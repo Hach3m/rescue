@@ -34,6 +34,10 @@ class publication
      * @ORM\Column(name="dateAjout", type="datetimetz")
      */
     private $dateAjout;
+    /**
+    *@ORM\ManyToOne(targetEntity="MH\UserBundle\Entity\User")
+   */
+   private $user;
 
     /**
     *@ORM\ManyToMany(targetEntity="MH\PlatformBundle\Entity\animal")
@@ -45,6 +49,12 @@ class publication
    */
 
   private $images;
+
+  /**
+ * @ORM\OneToMany(targetEntity="MH\PlatformBundle\Entity\Comment",mappedBy="publication")
+ */
+ 
+  protected $comments;
 
     /**
      * Get id
@@ -177,5 +187,63 @@ class publication
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \MH\UserBundle\Entity\User $user
+     *
+     * @return publication
+     */
+    public function setUser(\MH\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \MH\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \MH\PlatformBundle\Entity\Comment $comment
+     *
+     * @return publication
+     */
+    public function addComment(\MH\PlatformBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \MH\PlatformBundle\Entity\Comment $comment
+     */
+    public function removeComment(\MH\PlatformBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

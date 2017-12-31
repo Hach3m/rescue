@@ -15,13 +15,18 @@ class PubController extends Controller
 {
     public function indexAction()
     {
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $em=$this->getDoctrine()->getManager();
+        $pubRepository=$em->getRepository('MHPlatformBundle:publication');
+        $pubs=$pubRepository->pubsFindAll();
         return $this->render('MHPlatformBundle:Pub:index.html.twig', array(
-            // ...
+            'pubs'=>$pubs
         ));
     }
 
     public function consulterAction($id)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('MHPlatformBundle:Pub:consulter.html.twig', array(
             // ...
         ));
@@ -29,6 +34,7 @@ class PubController extends Controller
 
     public function ajouterAction(Request $request )
     {
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $image=new image();
         $image2=new image();
         $publication=new publication();
@@ -89,6 +95,7 @@ class PubController extends Controller
 
     public function supprimerAction($id)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('MHPlatformBundle:Pub:supprimer.html.twig', array(
             // ...
         ));

@@ -10,4 +10,14 @@ namespace MH\PlatformBundle\Repository;
  */
 class publicationRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function pubsFindAll(){
+    $qb=$this->createQueryBuilder('p')
+        ->leftJoin('p.user','u')
+        ->leftJoin('p.images','i')
+        ->leftJoin('p.animals','pa')
+        ->addSelect('u')
+        ->addSelect('i')
+        ->addSelect('pa');
+        return $qb->getQuery()->getResult();
+  }
 }

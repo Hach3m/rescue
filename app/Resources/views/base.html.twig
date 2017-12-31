@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" >
        <head>
          <meta charset="UTF-8" />
          <title>{% block title %}Welcome!{% endblock %}</title>
-         {% block stylesheets %}{% endblock %}
+         {% block stylesheets %}
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1">
 
          <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="../styles/Mystyle.css">
-         <link rel="stylesheet" href="../styles/animate.css">
-         <link rel="stylesheet" href="../styles/style.css">
+         <link rel="stylesheet" href="{{asset('styles/Mystyle.css')}}">
+
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
-        <link rel="stylesheet" href="../styles/welle.css">
-
+        <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')}}">
+        <link href="{{asset('https://fonts.googleapis.com/css?family=Droid+Sans:400,700')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('styles/welle.css')}}">
+        <link rel="stylesheet" href="{{asset('styles/style.css')}}">
+        <link rel="stylesheet" href="{{asset('styles/animate.css')}}">
+        {% endblock %}
          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
          <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
          <!--[if lt IE 9]>
@@ -28,14 +29,22 @@
        <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
         <!-- jQuery -->
         <script src="//code.jquery.com/jquery.min.js"></script>
         <!-- Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="{{asset('JS/monScript.js')}}"></script>
+        <script src="{{asset('JS/jquery.timeago.js')}}"></script>
+        <script src="{{asset('JS/jquery.timeago.fr.js')}}"></script>
+        <script src="{{asset('JS/jquery.livequery.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".timeago").livequery(function(){
+                    $(this).timeago();
+                });
+            });
+        </script>
   <!-- Your own javascript -->
-  <script src="../JS/main.js"></script>
-  <script src="../JS/wow.min.js"></script>
-  <script src="../JS/jquery.prettyPhoto.js"></script>
-  <script src="../JS/jquery.isotope.min.js"></script>
        </body>
 </html>
