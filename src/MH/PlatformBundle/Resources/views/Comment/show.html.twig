@@ -1,0 +1,46 @@
+{% for comment in listeComment %}
+{#foreach($pubCom as $commentaire):
+$user=new Membre();
+$url=$user->getImagesUrl($commentaire->id_user);
+$timecomment=$commentaire->date_comment;
+?>#}
+<ul class="child-comments-content-a child-comments-content-b" id="com-{{comment.id}}_comment">
+<li class="super-comment-content" >
+    <div class="user-comment-identity-a user-comment-identity-b">
+        <img class="min-img-user" src="">
+    </div>
+    <div class="child-comment-content">
+        <div class="user-identity-content" style="margin: 0px;">
+            <div class="post-user-detail">
+                <div class="post-username-content">
+                    <div class="min-username-content">
+                        <a href="http://localhost/MonSitePhp/User.other.php?ident=<?=$commentaire->id_user;?>">{{comment.User.username}}</a>
+                    </div>
+                </div>
+                <div class="date-content">
+                    <span class="timeago" title="<?=$timecomment?>">{{comment.dateAjout | date('d-m-Y')}}</span>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="comment-content">
+            <p>
+                {{comment.text}}
+            </p>
+        </div>
+
+    </div>
+    <hr class="hr-dashed">
+    <div class="date-content" style="padding: 10px">
+        {#<?php if($_SESSION['id_user']==$commentaire->id_user)
+    echo "<button id=\"delete-com-".$commentaire->id_comment."\"type=\"submit\" name=\"delete_com\" class=\"close\" aria-hidden=\"true\"
+                onclick=\"deleteComment(this);\">
+            &times;</button>";
+    ?>#}
+
+    </div>
+
+</li>
+</ul>
+{% endfor %}

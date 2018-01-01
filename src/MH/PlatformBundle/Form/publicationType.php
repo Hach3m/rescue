@@ -28,6 +28,10 @@ class publicationType extends AbstractType
             'class' => 'MHPlatformBundle:animal',
             'choice_label'=>'nom',
             'multiple' => true,
+            'query_builder' => function(\MH\PlatformBundle\Repository\animalRepository $ar) use ($options) {
+                return $ar->getAnimalByUser($options['user']);
+              },
+
           )
         )
         ->add('images', CollectionType::class, array(
@@ -49,6 +53,7 @@ class publicationType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'MH\PlatformBundle\Entity\publication'
         ));
+        $resolver->setDefined(array('user'));
     }
 
     /**

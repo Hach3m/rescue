@@ -3,7 +3,7 @@
 {% block title %}MHPlatformBundle:Pub:index{% endblock %}
 
 {% block body %}
-{{ dump(pubs)}}
+
 {% include 'MHPlatformBundle:include:header.html.twig' %}
 <div class="col-md-9 col-lg-9" >
 {% for pub in pubs %}
@@ -17,7 +17,7 @@
               <div class="post-user-detail" >
                   <div class="post-username-content">
                       <div class="min-username-content" >
-                          <a href="http://localhost/MonSitePhp/User.other.php?ident=">{{pub.user.username}}</a>
+                          <a href="{{(path('Animalshow',{'id':pub.user.id}))}}">{{pub.user.username}}</a>
                       </div>
                   </div>
                   <div class="date-content" >
@@ -86,32 +86,40 @@
 
             <div class="child-btns-content">
                 <div style="vertical-align: middle">
-                <label style="color: #0f0f0f;position: relative;">|</label>
+                <label style="color: #0f0f0f;position: relative;"></label>
                 <label style="color: #0f0f0f ;position: relative;"></label>
                 </div>
                 <form method="post" action="../MonSitePhp/Profile.php">
                     <div class="super-first-btn-content" >
-                        <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
+                        {#<div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true" style="height:18px;width:18px;margin:11px;color:#5c5cd6;"
                                   onclick="avis(this);return false;"></span>
                         </div>
                         <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
                             <span class="glyphicon glyphicon-minus" aria-hidden="true" style="height:18px;width:18px;margin:11px;color:#5c5cd6;"
                                   onclick="avis(this);return false;"></span>
+                        </div>#}
+                        {% if(app.user.type == 'Veterinary') %}
+                        <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b" onclick="postAdvice(this);">
+                            <span class="glyphicon glyphicon-comment" id="advice-{{pub.id}}" aria-hidden="true"
+                                  style="height:18px;width:18px;margin:11px; color:#5c5cd6;" ></span>
+                                  Conseil Medical
                         </div>
-                        <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
+                        {% endif %}
+                        <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b" onclick="post(this);">
                             <span class="glyphicon glyphicon-comment" id="commenter-{{pub.id}}" aria-hidden="true"
-                                  style="height:18px;width:18px;margin:11px; color:#5c5cd6;" onclick="post(this);"></span>
+                                  style="height:18px;width:18px;margin:11px; color:#5c5cd6;" ></span>
+                                  Comment
                         </div>
 
-                            <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
+                            <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b" onclick="setVisibilite(this)">
                                 <span id="visibilite-{{pub.id}}" class="glyphicon glyphicon-eye-open";
                                  aria-hidden="true" style="height:18px;width:18px;margin:11px; color:#5c5cd6;"
-                                onclick="setVisibilite(this)"></span>
+                                ></span>View Comments
                             </div>
                             <div class="child-first-btn-content child-first-btn-content-a child-first-btn-content-b">
                                 <span id="delete-{{pub.id}}" class="glyphicon glyphicon-trash" aria-hidden="true" style="height:18px;width:18px;margin:11px; color:#5c5cd6;"
-                                onclick="deleteFile(this);"></span>
+                                onclick="deleteFile(this);"></span>delete
                             </div>
                         <input type="hidden" name="id_file" value="">
                         <input type="hidden" name="id_user_file" value="">
@@ -121,7 +129,7 @@
             </div>
 
         <div>
-            <div class="super-comments-content">
+            <div id="file-comment-{{pub.id}}" class="super-comments-content">
                 <div id="your-comment{{pub.id}}" class="form-group child-comments-content-a child-comments-content-b " style="display: none">
                     <div class="super-comment-content">
                         <div class="user-comment-identity-a user-comment-identity-b">
@@ -133,6 +141,18 @@
                     </div>
                 </div>
             </div>
+            <div id="file-advice-{{pub.id}}" class="super-comments-content" style="background-color: #00C853;">
+                <div id="your-advice{{pub.id}}" class="form-group child-comments-content-a child-comments-content-b " style="display: none">
+                    <div class="super-comment-content">
+                        <div class="user-comment-identity-a user-comment-identity-b">
+                            <img class="min-img-user" src="images/bridge.jpg">
+                        </div>
+                        <input type="text" class="form-control"style="
+                               border: none;
+                               box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.14);"placeholder="write your comment here" onkeyup="conseiller(this,event);" >
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -140,4 +160,11 @@
 <div style="margin-top=10 px;"></div>
 {% endfor %}
 </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+var addCommentUrl="{{(path('create'))}}";
+var showCommentsUrl="{{(path('show'))}}";
+var imported=false;
+</script>
 {% endblock %}

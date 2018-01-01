@@ -3,6 +3,7 @@
 namespace MH\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * animal
@@ -43,9 +44,10 @@ class animal
     private $ageApproximatif;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="etat", type="boolean", nullable=true)
+     * @ORM\Column(name="etat", type="string", length=255,options={"default" : "Sain"})
+     * @Assert\Choice({"Perdu", "Malade","Adoption"})
      */
     private $etat;
 
@@ -62,8 +64,11 @@ class animal
      *@ORM\JoinColumn(nullable=false)
     */
     private $race;
-
-
+    /**
+    *@ORM\ManyToOne(targetEntity="MH\UserBundle\Entity\User")
+    *@ORM\JoinColumn(nullable=false)
+   */
+   private $user;
      /**
       * Get id
       *
@@ -216,5 +221,29 @@ class animal
     public function getRace()
     {
         return $this->race;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \MH\UserBundle\Entity\User $user
+     *
+     * @return animal
+     */
+    public function setUser(\MH\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \MH\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

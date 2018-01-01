@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}MHPlatformBundle:Animal:show{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Animal:show page</h1>
+<div class="row ">
+  <div class="col-lg-12">
+    <h2 class="my-4">My Pets</h2>
+  </div>
+{% for animal in animals %}
+
+
+  <div class="col-lg-4 col-sm-6 text-center mb-4">
+    <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
+    <h3>{{ animal.nom }}
+      <small>{{ animal.ageApproximatif}} ans</small>
+    </h3>
+    <p>{{ animal.categorie.nom }}</p>
+  </div>
+
+
+{% endfor %}
+</div>
+{% endblock %}

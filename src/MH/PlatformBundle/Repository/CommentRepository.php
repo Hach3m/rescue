@@ -10,4 +10,12 @@ namespace MH\PlatformBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function commentFindAll($pubId){
+    $qb=$this->createQueryBuilder('c')
+        ->innerJoin('c.user','u','WITH','c.publication=:pubId')
+        ->addSelect('u')
+        ->setParameter('pubId',$pubId);
+
+        return $qb->getQuery()->getResult();
+  }
 }

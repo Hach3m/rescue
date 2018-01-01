@@ -20,4 +20,5 @@ class publicationRepository extends \Doctrine\ORM\EntityRepository
         ->addSelect('pa');
         return $qb->getQuery()->getResult();
   }
+
 }

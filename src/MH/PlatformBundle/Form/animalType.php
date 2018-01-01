@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
@@ -28,7 +29,7 @@ class animalType extends AbstractType
         ->add('nom',              TextType::class)
         ->add('dateNaissance',     DateType::class)
         ->add('ageApproximatif',   IntegerType::class)
-        ->add('etat',             CheckboxType::class,array('required'=>false))
+        ->add('etat',             ChoiceType::class,array('choices'=>array("Perdu"=>"Perdu", "Malade"=>"Malade","Adoption"=>"Adoption")))
         ->add('categorie',        EntityType::class,array(
               'class'=>'MHPlatformBundle:categorie',
               'choice_label'=>'nom',

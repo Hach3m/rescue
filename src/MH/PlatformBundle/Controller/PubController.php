@@ -2,6 +2,7 @@
 
 namespace MH\PlatformBundle\Controller;
 use MH\PlatformBundle\Entity\publication;
+use MH\PlatformBundle\Entity\animal;
 use MH\PlatformBundle\Entity\image;
 use MH\PlatformBundle\Form\publicationType;
 
@@ -15,7 +16,7 @@ class PubController extends Controller
 {
     public function indexAction()
     {
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $em=$this->getDoctrine()->getManager();
         $pubRepository=$em->getRepository('MHPlatformBundle:publication');
         $pubs=$pubRepository->pubsFindAll();
@@ -40,7 +41,9 @@ class PubController extends Controller
         $publication=new publication();
         $publication->addImage($image);
         $publication->addImage($image2);
-        $formBuilder=$this->get('form.factory')->createBuilder(publicationType::class,$publication);
+
+        $animal=new animal();
+        $formBuilder=$this->get('form.factory')->createBuilder(publicationType::class,$publication,array('user' => $this->getUser()));
         /*$formBuilder
         ->add('nom',              TextType::class)
         ->add('dateNaissance',     DateType::class)
@@ -75,7 +78,7 @@ class PubController extends Controller
             if($form->isValid())
             {
               $images=$publication->getImages();
-
+              $publication->setUser($this->getUser());
               $em=$this->getDoctrine()->getManager();
               $em->persist($publication);
 

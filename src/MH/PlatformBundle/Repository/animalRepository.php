@@ -1,6 +1,7 @@
 <?php
 
 namespace MH\PlatformBundle\Repository;
+use MH\PlatformBundle\Entity\animal;
 
 /**
  * animalRepository
@@ -10,5 +11,12 @@ namespace MH\PlatformBundle\Repository;
  */
 class animalRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getAnimalByUser($id){
+    $qb=$this->createQueryBuilder('a')
+        ->where('a.user = :id')
+        ->orderBy('a.nom','ASC')
+        ->setParameter('id',$id);
+    return $qb;
+  }
 
 }

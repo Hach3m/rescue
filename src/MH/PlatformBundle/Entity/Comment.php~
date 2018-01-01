@@ -3,6 +3,7 @@
 namespace MH\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -36,7 +37,15 @@ class Comment
     private $dateAjout;
 
     /**
-    *@ORM\ManyToOne(targetEntity="MH\PlatformBundle\Entity\publication",inversedBy="images")
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\Choice({"Comment","Advice"})
+     */
+     private $type;
+
+    /**
+    *@ORM\ManyToOne(targetEntity="MH\PlatformBundle\Entity\publication",inversedBy="comments")
     *@ORM\JoinColumn(nullable=false)
    */
     private $publication;
@@ -103,5 +112,53 @@ class Comment
     public function getDateAjout()
     {
         return $this->dateAjout;
+    }
+
+    /**
+     * Set publication
+     *
+     * @param \MH\PlatformBundle\Entity\publication $publication
+     *
+     * @return Comment
+     */
+    public function setPublication(\MH\PlatformBundle\Entity\publication $publication)
+    {
+        $this->publication = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Get publication
+     *
+     * @return \MH\PlatformBundle\Entity\publication
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \MH\UserBundle\Entity\User $user
+     *
+     * @return Comment
+     */
+    public function setUser(\MH\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \MH\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

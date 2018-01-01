@@ -201,12 +201,11 @@
     flex-grow: 0;
     -webkit-flex-shrink: 0;
     flex-shrink: 0;
-}
 .child-first-btn-content{
-    background: #eee;
+}
+
     display: block;
-    height: 36px;
-    width: 36px;
+
     text-align: center;
 }
 .child-first-btn-content-a{
@@ -218,18 +217,21 @@
     -webkit-transition: background .3s;
     transition: background .3s;
     border: 0;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+
     cursor: pointer;
     display: inline-block;
-    height: 38px;
+
     outline: none;
     overflow: hidden;
     position: relative;
     text-align: center;
     -webkit-tap-highlight-color: transparent;
-    width: 38px;
+
     z-index: 0;
+}
+
+.child-first-btn-content-b:hover .child-first-btn-content-b:focus{
+      color:red;
 }
 .user-comment-identity-a{
     display: block;
@@ -330,7 +332,7 @@
 .marge{
   margin-top: -20%;
 
-	
+
 }
 .margee{
 	height: 100%;
@@ -407,7 +409,7 @@
     background-color: transparent;
     background-image: url(../img/search-icon.png);
     background-size: 30px;
-    background-position: 10px 10px; 
+    background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
     margin-top: 20px;

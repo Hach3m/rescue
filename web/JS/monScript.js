@@ -147,42 +147,36 @@ function login($btn){
 }
 }
 function setVisibilite($visibilite){
-    var id=$visibilite.id;
+    var id=$visibilite.children[0].id;
+    $visibilite=$visibilite.children[0];
     id=id.replace("visibilite-","");
-    if($visibilite.getAttribute('class')=="btn-special fa fa-eye-slash ")
+    var data={"id_Pub":id};
+    if ((!imported)&&($visibilite.getAttribute('class','glyphicon glyphicon-eye-open')))
     {
+      $.ajax({
+          type: "POST",
+          url: showCommentsUrl,
+          data: data,
+          dataType: "html",
+          success: function (result) {
+            $("#file-comment-"+id).append(result);
+              $visibilite.setAttribute('class','glyphicon glyphicon-eye-close');
+              imported=true;
+          },
+          error: function (msg, string) {
 
-            $.ajax({
-                type: "POST",
-                url: "../MonSitePhp/FileAction.php",
-                data: "set_vis=changer&id_file="+id+"&maj="+1,
-                dataType: "json",
-                success: function (result) {
-                    $visibilite.setAttribute('class','btn-special fa fa-eye')
-                },
-                error: function (msg, string) {
-
-                }
-            });
-
+          }
+      });
 
     }
-    else if ($visibilite.getAttribute('class')=="btn-special fa fa-eye ")
-    {
-
-            $.ajax({
-                type: "POST",
-                url: "../MonSitePhp/FileAction.php",
-                data: "set_vis=changer&id_file="+id+"&maj="+0,
-                dataType: "json",
-                success: function (result) {
-                    $visibilite.setAttribute('class','btn-special fa fa-eye-slash')
-                },
-                error: function (msg, string) {
-
-                }
-            });
-
+    else if (imported) {
+      if($("#file-comment-"+id).css('display')=='block'){
+        $visibilite.setAttribute('class','glyphicon glyphicon-eye-open');
+      }
+      else {
+        $visibilite.setAttribute('class','glyphicon glyphicon-eye-close');
+      }
+      $("#file-comment-"+id).toggle('slow');
     }
 }
 ;
@@ -240,14 +234,16 @@ function commenter(input,event){
         var text=input.value;
         var fileid=input.parentNode.parentNode.id;
         fileid=fileid.replace("your-comment","");
+        var data={"id_Pub":fileid,"comText":text,"type":false};
         $(document).ready(function () {
             $.ajax({
                 type: "POST",
-                url: "../MonSitePhp/CommentAction.php",
-                data: "comments=coment&id_file="+fileid+"&comText="+text,
+                url: addCommentUrl,
+                data: data,
                 dataType: "json",
                 success: function (result) {
-                    d=JSON.stringify(result)
+                  input.value="";
+                    /*d=JSON.stringify(result)
                     $.ajax({
                         type: "POST",
                         url: "../MonSitePhp/views/CommentContent.php",
@@ -262,6 +258,27 @@ function commenter(input,event){
                             //alert("barri raw7i"+string+msg);
                         },
                     });
+                */},
+                error: function (msg, string) {
+                },
+            });
+        });
+    }
+}
+function conseiller(input,event){
+    if (event.keyCode==13){
+        var text=input.value;
+        var fileid=input.parentNode.parentNode.id;
+        fileid=fileid.replace("your-advice","");
+        var data={"id_Pub":fileid,"comText":text,"type":true};
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: addCommentUrl,
+                data: data,
+                dataType: "json",
+                success: function (result) {
+                  input.value="";
                 },
                 error: function (msg, string) {
                 },
@@ -438,8 +455,13 @@ $(document).ready(function (e){
     })  ;
 });
 function post($sp){
-    var retour=$sp.id;
+    var retour=$sp.children[0].id;
     retour=retour.replace("commenter-","your-comment")
+    $("#"+retour).toggle('slow');
+}
+function postAdvice($sp){
+    var retour=$sp.children[0].id;
+    retour=retour.replace("advice-","your-advice")
     $("#"+retour).toggle('slow');
 }
 // Semicolon (;) to ensure closing of earlier scripting

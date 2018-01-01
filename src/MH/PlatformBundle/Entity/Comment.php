@@ -3,6 +3,7 @@
 namespace MH\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -36,7 +37,15 @@ class Comment
     private $dateAjout;
 
     /**
-    *@ORM\ManyToOne(targetEntity="MH\PlatformBundle\Entity\publication",inversedBy="images")
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\Choice({"Comment","Advice"})
+     */
+     private $type;
+
+    /**
+    *@ORM\ManyToOne(targetEntity="MH\PlatformBundle\Entity\publication",inversedBy="comments")
     *@ORM\JoinColumn(nullable=false)
    */
     private $publication;
@@ -151,5 +160,29 @@ class Comment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Comment
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

@@ -1,7 +1,3 @@
-mh_platform_homepage:
-    path:     /
-    defaults: { _controller: MHPlatformBundle:Default:index }
-
 index:
     path:     /accueil
     defaults: { _controller: MHPlatformBundle:Pub:index }
@@ -17,3 +13,35 @@ ajouter:
 supprimer:
     path:     /supprimer/{id}
     defaults: { _controller: MHPlatformBundle:Pub:supprimer }
+
+create:
+    path:     /create
+    defaults: { _controller: MHPlatformBundle:Comment:create }
+    requirements:
+        _method:  POST
+
+show:
+    path:     /show
+    defaults: { _controller: MHPlatformBundle:Comment:show }
+    requirements:
+        _method:  POST
+
+delete:
+    path:     /delete
+    defaults: { _controller: MHPlatformBundle:Comment:delete }
+
+add:
+    path:     /add
+    defaults: { _controller: MHPlatformBundle:Animal:add }
+
+Animalshow:
+    path:     Animal/show/{id}
+    defaults: { _controller: MHPlatformBundle:Animal:show }
+
+delete:
+    path:     /delete
+    defaults: { _controller: MHPlatformBundle:Animal:delete }
+
+adopt:
+    path:     /adopt
+    defaults: { _controller: MHPlatformBundle:Animal:adopt }
